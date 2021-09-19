@@ -60,7 +60,7 @@ return {
     'modules.data.quickbar',
     'modules.data.alt-view',
     'modules.data.tag',
-    'modules.data.bonus',
+    -- 'modules.data.bonus',
 
     --- GUI
     'modules.gui.readme',
