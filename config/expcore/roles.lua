@@ -205,8 +205,7 @@ Roles.new_role('Member','Mem')
     'command/save-quickbar'
 }
 
--- local hours3, hours15 = 3*216000, 15*60
--- These players automatically don't get roles, as they get the role when linking to Discord
+local mins20 = 20*60*60
 Roles.new_role('Regular','Reg')
 :set_permission_group('Standard')
 :set_custom_color{r=79,g=155,b=163}
@@ -219,15 +218,11 @@ Roles.new_role('Regular','Reg')
     'standard-decon',
     'bypass-entity-protection'
 }
--- :set_auto_assign_condition(function(player)
---     if player.online_time >= hours3 then -- auto assign after $hours3, which is currently 3h (from ticks)
---         return true
---     else
---         local stats = Statistics:get(player, {})
---         local playTime, afkTime, mapCount = stats.Playtime or 0, stats.AfkTime or 0, stats.MapsPlayed or 0
---         return playTime - afkTime >= hours15 and mapCount >= 5
---     end
--- end)
+:set_auto_assign_condition(function(player)
+    if player.online_time >= mins20 then -- auto assign after $hours3, which is currently 3h (from ticks)
+        return true
+    end
+end)
 
 --- Guest/Default role
 local default = Roles.new_role('Guest','')
