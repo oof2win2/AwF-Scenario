@@ -37,11 +37,6 @@ All are welcome to make pull requests and issues for this scenario, if you are i
 - Patches may be named `patch/X.Y.Z` and will be merged into `dev` and then `master` when appropriate.
 
 The All-Weekend Factorio codebase is licensed under the [GNU General Public License v3.0](LICENSE)
-[discord]: https://awf.yt
+discord: https://awf.yt
 
 The original code for this scenario is from [Explosive Gaming](https://github.com/explosivegaming/scenario), we just adapted it to suit our needs and have some extra stuff we use
-[factorio]: https://factorio.com/
-[docs]: https://explosivegaming.github.io/scenario/
-[issues]: https://github.com/explosivegaming/scenario/issues/new/choose
-[website]: https://explosivegaming.nl
-[discord]: https://discord.explosivegaming.nl
