@@ -22,7 +22,9 @@ local function create_blueprint_rows(container)
 		--TODO: change this LuaGuiElement.add to the Gui.element{} from the base scenario
 		local line = container.add{
 			type="flow",
-			name=tostring(linei)
+			tags={
+				index=linei
+			}
 		}
 		for itemi = 1, bps_per_line do
 			local index = (linei-1) * bps_per_line + itemi
@@ -30,7 +32,6 @@ local function create_blueprint_rows(container)
 			local signal = bp and bp.blueprint_icons and bp.blueprint_icons[1].signal
 			local sprite = signal and signal.type .. (signal.name and ("/" .. signal.name)) or ""
 			local element = line.add{
-				name=tostring(index),
 				type="sprite-button",
 				tooltip="Some Blueprint Tooltip",
 				sprite=sprite,
@@ -50,13 +51,22 @@ end
 
 local function redraw_blueprints(container)
 	for linei = 1, config.blueprint_count / bps_per_line or 1  do
-		local line = container[tostring(linei)]
+		local line
+		for _, element in ipairs(container.children) do
+			if element.tags.index == linei then line = element end
+		end
 		for itemi = 1, bps_per_line do
 			local index = (linei-1) * bps_per_line + itemi
 			local bp = blueprint_data.inventory and blueprint_data.inventory[index]
 			local signal = bp and bp.blueprint_icons and bp.blueprint_icons[1].signal
 			local sprite = signal and signal.type .. (signal.name and ("/" .. signal.name)) or ""
-			local element = line[tostring(index)]
+			local element
+			for _, e in ipairs(line.children) do
+				if e.tags.index == index then
+					element = e
+					break
+				end
+			end
 			element.sprite = sprite
 			element.tooltip = "Some Blueprint Tooltip"
 		end
@@ -78,17 +88,26 @@ Event.add(defines.events.on_gui_click, function (event)
 
 	-- if the item is not a BP, BP book, decon or upgrade planner, then ignore the click
 	-- also ignore if player has nothing or blueprint is blank
-	if not player.is_cursor_blueprint() then
-		if 	blueprint_data.inventory[blueprint_index].valid_for_read
-			and player.clear_cursor()
-			then
-			player.cursor_stack.set_stack(blueprint_data.inventory[blueprint_index])
+	if not Roles.player_allowed(player, 'gui/default-blueprints') then
+		if not player.is_cursor_blueprint() then
+			if 	blueprint_data.inventory[blueprint_index].valid_for_read
+				and player.clear_cursor()
+				then
+				player.cursor_stack.set_stack(blueprint_data.inventory[blueprint_index])
+			end
+			return
 		end
 		return
 	end
-	if not Roles.player_allowed(player, 'gui/default-blueprints') then return end
-
 	if event.button == defines.mouse_button_type.left then
+		if not player.is_cursor_blueprint() then
+			if 	blueprint_data.inventory[blueprint_index].valid_for_read
+				and player.clear_cursor()
+				then
+				player.cursor_stack.set_stack(blueprint_data.inventory[blueprint_index])
+			end
+			return
+		end
 		blueprint_data.inventory[blueprint_index].set_stack(player.cursor_stack)
 	elseif event.button == defines.mouse_button_type.right then
 		blueprint_data.inventory[blueprint_index].clear()
