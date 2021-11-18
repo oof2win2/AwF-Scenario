@@ -15,7 +15,8 @@ local interface_modules = {
     ['Gui'] = 'expcore.gui',
     ['Async'] = 'expcore.async',
     ['Datastore'] = 'expcore.datastore',
-    ['External'] = 'expcore.external'
+    ['External'] = 'expcore.external',
+	['Blueprints'] = 'modules.gui.default-blueprints',
 }
 
 -- loads all the modules given in the above table

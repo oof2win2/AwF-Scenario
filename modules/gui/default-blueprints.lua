@@ -10,7 +10,7 @@ local config = require 'config.gui.default-blueprints'  --- @dep config.gui.defa
 local bps_per_line = 6
 
 local blueprint_data = {
-	inventory=nil
+	inventory=nil,
 }
 
 Global.register(blueprint_data, function(t)
@@ -33,7 +33,6 @@ local function create_blueprint_rows(container)
 			local sprite = signal and signal.type .. (signal.name and ("/" .. signal.name)) or ""
 			local element = line.add{
 				type="sprite-button",
-				tooltip="Some Blueprint Tooltip",
 				sprite=sprite,
 				tags={
 					mod="scenario",
@@ -49,10 +48,10 @@ local function create_blueprint_rows(container)
 	end
 end
 
-local function redraw_blueprints(container)
+local function redraw_blueprints(scroll_table)
 	for linei = 1, config.blueprint_count / bps_per_line or 1  do
 		local line
-		for _, element in ipairs(container.children) do
+		for _, element in ipairs(scroll_table.children) do
 			if element.tags.index == linei then line = element end
 		end
 		for itemi = 1, bps_per_line do
@@ -68,15 +67,11 @@ local function redraw_blueprints(container)
 				end
 			end
 			element.sprite = sprite
-			element.tooltip = "Some Blueprint Tooltip"
 		end
 	end
 end
-
-Event.add(defines.events.on_player_created, function (event)
-	if event.player_index == 1 then
-		blueprint_data.inventory = game.create_inventory(config.blueprint_count)
-	end
+Event.on_init(function ()
+	blueprint_data.inventory = game.create_inventory(config.blueprint_count)
 end)
 
 Event.add(defines.events.on_gui_click, function (event)
@@ -100,16 +95,21 @@ Event.add(defines.events.on_gui_click, function (event)
 		return
 	end
 	if event.button == defines.mouse_button_type.left then
-		if not player.is_cursor_blueprint() then
-			if 	blueprint_data.inventory[blueprint_index].valid_for_read
-				and player.clear_cursor()
-				then
+		-- TODO: make this work with blueprint library if this gets released
+		-- https://forums.factorio.com/viewtopic.php?f=28&t=96245
+		if not player.is_cursor_blueprint() and player.clear_cursor() then
+			-- only read if there is an item
+			if blueprint_data.inventory[blueprint_index].valid_for_read then
 				player.cursor_stack.set_stack(blueprint_data.inventory[blueprint_index])
 			end
 			return
 		end
-		blueprint_data.inventory[blueprint_index].set_stack(player.cursor_stack)
+		if player.cursor_stack.valid_for_read then
+			-- TODO: save the addition to the bot
+			blueprint_data.inventory[blueprint_index].set_stack(player.cursor_stack)
+		end
 	elseif event.button == defines.mouse_button_type.right then
+		-- TODO: save the addition to the bot
 		blueprint_data.inventory[blueprint_index].clear()
 	end
 	redraw_blueprints(event.element.parent.parent) -- get the scroll_table as it is the parent's parent
@@ -117,8 +117,6 @@ end)
 
 local blueprint_container =
 Gui.element(function(event_trigger, parent)
-    local player = Gui.get_player_from_element(parent)
-
     -- Draw the internal container
     local container = Gui.container(parent, event_trigger, 200)
 
@@ -145,3 +143,41 @@ end)
 :add_to_left_flow()
 
 Gui.left_toolbar_button('item/blueprint', {'default-blueprints.main-tooltip'}, blueprint_container)
+
+local lib = {}
+function lib.GetBlueprints(index)
+	local bp = blueprint_data.inventory[index]
+	return bp.export_stack()
+end
+function lib.SetBlueprint(index, bpString)
+	-- if not blueprint_data.container then return end
+	local bp = blueprint_data.inventory[index]
+	if bpString == nil then
+		bp.clear()
+	else
+		bp.import_stack(bpString)
+	end
+	for _, player in pairs(game.connected_players) do
+        local frame = Gui.get_left_element(player, blueprint_container)
+        if frame then
+			local container = frame.container
+			if container then
+				local scroll_table = container.scroll.table
+				if scroll_table then
+					redraw_blueprints(scroll_table)
+				end
+			end
+		end
+	end
+end
+local function RequestBlueprintFromBot(index)
+	-- TODO: request the blueprint from the bot
+end
+
+Event.on_init(function ()
+	for i = 1, config.blueprint_count do
+		RequestBlueprintFromBot(i)
+	end
+end)
+
+return lib
