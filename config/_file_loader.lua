@@ -74,8 +74,7 @@ return {
     'modules.gui.server-ups',
     'modules.commands.debug',
 
-    --- Gamemodes
-    -- 'modules.gamemodes.biterspawn',
+		'modules.graftorio.require', -- graftorio
 
     --- Config Files
     'config.expcore.command_auth_admin', -- commands tagged with admin_only are blocked for non admins
