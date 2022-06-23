@@ -206,7 +206,7 @@ Roles.new_role('Member','Mem')
     'command/save-quickbar'
 }
 
-local mins20 = 20*60*60
+local mins60 = 60*60*60
 Roles.new_role('Regular','Reg')
 :set_permission_group('Standard')
 :set_custom_color{r=79,g=155,b=163}
@@ -220,7 +220,7 @@ Roles.new_role('Regular','Reg')
     'bypass-entity-protection'
 }
 :set_auto_assign_condition(function(player)
-    if player.online_time >= mins20 then -- auto assign after $hours3, which is currently 3h (from ticks)
+    if player.online_time >= mins60 then -- auto assign after $hours3, which is currently 3h (from ticks)
         return true
     end
 end)
