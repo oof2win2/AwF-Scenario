@@ -218,7 +218,8 @@ Roles.new_role('Regular','Reg')
     'command/go-to-spawn',
     'command/me',
     'standard-decon',
-    'bypass-entity-protection'
+    'bypass-entity-protection',
+		'bypass-nukeprotect'
 }
 :set_auto_assign_condition(function(player)
     if player.online_time >= mins60 then -- auto assign after $hours3, which is currently 3h (from ticks)
@@ -257,6 +258,7 @@ Roles.new_role('Jail')
 :set_permission_group('Restricted')
 :set_custom_color{r=50,g=50,b=50}
 :set_block_auto_assign(true)
+:set_flag("defer_role_changes")
 :disallow(default.allowed)
 
 --- System defaults which are required to be set
