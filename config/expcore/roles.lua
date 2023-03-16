@@ -197,7 +197,6 @@ Roles.new_role('Veteran','Vet')
 Roles.new_role('Member','Mem')
 :set_permission_group('Standard')
 :set_custom_color{r=24,g=172,b=188}
-:set_flag("deconlog-bypass")
 :set_parent('Regular')
 :allow{
     'gui/task-list/add',
