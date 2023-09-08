@@ -6,12 +6,20 @@ local Colors = require 'utils.color_presets' --- @dep utils.color_presets
 local write_json, format_time = _C.write_json, _C.format_time --- @dep expcore.common
 local config = require 'config.discord_alerts' --- @dep config.discord_alerts
 
-local playtime_format = { short = true, hours = true, minutes = true, string = true }
+local playtime_format = {hours = true, minutes = true, short = true, string = true}
+
 local function append_playtime(player_name)
-    if not config.show_playtime then return player_name end
+    if not config.show_playtime then
+        return player_name
+    end
+
     local player = game.get_player(player_name)
-    if not player then return player_name end
-    return player.name..' ('..format_time(player.online_time, playtime_format)..')'
+
+    if not player then
+        return player_name
+    end
+
+    return player.name ..' (' .. format_time(player.online_time, playtime_format) .. ')'
 end
 
 local function get_player_name(event)
@@ -24,10 +32,10 @@ local function to_hex(color)
     local function hex(bit)
         local major, minor = math.modf(bit/16)
         major, minor = major+1, minor*16+1
-        return hex_digits:sub(major, major)..hex_digits:sub(minor, minor)
+        return hex_digits:sub(major, major) .. hex_digits:sub(minor, minor)
     end
 
-    return '0x'..hex(color.r)..hex(color.g)..hex(color.b)
+    return '0x' .. hex(color.r) .. hex(color.g) .. hex(color.b)
 end
 
 local function emit_event(args)
@@ -40,10 +48,11 @@ local function emit_event(args)
     end
 
     local tick = args.tick or game.tick
-    local tick_formatted = format_time(tick, {days = true, hours = true, minutes = true, string = true, long = true})
+    local tick_formatted = format_time(tick, {days = false, hours = true, minutes = true, short = true, string = true})
 
     local players_online = 0
     local admins_online = 0
+
     for _, player in pairs(game.connected_players) do
         players_online = players_online + 1
         if player.admin then
@@ -93,8 +102,9 @@ if config.entity_protection then
             title='Entity Protection',
             description='A player removed protected entities',
             color=Colors.yellow,
-            ['Player']='<inline>'..append_playtime(player_name),
-            ['Entity']='<inline>'..event.entity.name
+            ['Player']='<inline>' .. append_playtime(player_name),
+            ['Entity']='<inline>' .. event.entity.name,
+            ['Location']=event.entity.position
         }
     end)
 end
@@ -108,9 +118,9 @@ if config.player_reports then
             title='Report',
             description='A player was reported',
             color=Colors.yellow,
-            ['Player']='<inline>'..append_playtime(player_name),
-            ['By']='<inline>'..append_playtime(by_player_name),
-            ['Report Count']='<inline>'..Reports.count_reports(player_name),
+            ['Player']='<inline>' .. append_playtime(player_name),
+            ['By']='<inline>' .. append_playtime(by_player_name),
+            ['Report Count']='<inline>' .. Reports.count_reports(player_name),
             ['Reason']=event.reason
         }
     end)
@@ -121,9 +131,9 @@ if config.player_reports then
             title='Reports Removed',
             description='A player has a report removed',
             color=Colors.green,
-            ['Player']='<inline>'..player_name,
-            ['By']='<inline>'..event.removed_by_name,
-            ['Report Count']='<inline>'..event.batch_count
+            ['Player']='<inline>' .. player_name,
+            ['By']='<inline>' .. event.removed_by_name,
+            ['Report Count']='<inline>' .. event.batch_count
         }
     end)
 end
@@ -138,9 +148,9 @@ if config.player_warnings then
             title='Warning',
             description='A player has been given a warning',
             color=Colors.yellow,
-            ['Player']='<inline>'..player_name,
-            ['By']='<inline>'..by_player_name,
-            ['Warning Count']='<inline>'..Warnings.count_warnings(player),
+            ['Player']='<inline>' .. player_name,
+            ['By']='<inline>' .. by_player_name,
+            ['Warning Count']='<inline>' .. Warnings.count_warnings(player),
             ['Reason']=event.reason
         }
     end)
@@ -151,9 +161,9 @@ if config.player_warnings then
             title='Warnings Removed',
             description='A player has a warning removed',
             color=Colors.green,
-            ['Player']='<inline>'..player_name,
-            ['By']='<inline>'..event.removed_by_name,
-            ['Warning Count']='<inline>'..event.batch_count
+            ['Player']='<inline>' .. player_name,
+            ['By']='<inline>' .. event.removed_by_name,
+            ['Warning Count']='<inline>' .. event.batch_count
         }
     end)
 end
@@ -167,8 +177,8 @@ if config.player_jail then
             title='Jail',
             description='A player has been jailed',
             color=Colors.yellow,
-            ['Player']='<inline>'..player_name,
-            ['By']='<inline>'..by_player_name,
+            ['Player']='<inline>' .. player_name,
+            ['By']='<inline>' .. by_player_name,
             ['Reason']=event.reason
         }
     end)
@@ -178,8 +188,8 @@ if config.player_jail then
             title='Unjail',
             description='A player has been unjailed',
             color=Colors.green,
-            ['Player']='<inline>'..player_name,
-            ['By']='<inline>'..by_player_name
+            ['Player']='<inline>' .. player_name,
+            ['By']='<inline>' .. by_player_name
         }
     end)
 end
@@ -193,8 +203,8 @@ if config.player_bans then
                 title='Banned',
                 description='A player has been banned',
                 color=Colors.red,
-                ['Player']='<inline>'..event.player_name,
-                ['By']='<inline>'..by_player.name,
+                ['Player']='<inline>' .. event.player_name,
+                ['By']='<inline>' .. by_player.name,
                 ['Reason']=event.reason
             }
         end
@@ -206,8 +216,8 @@ if config.player_bans then
                 title='Un-Banned',
                 description='A player has been un-banned',
                 color=Colors.green,
-                ['Player']='<inline>'..event.player_name,
-                ['By']='<inline>'..by_player.name
+                ['Player']='<inline>' .. event.player_name,
+                ['By']='<inline>' .. by_player.name
             }
         end
     end)
@@ -221,7 +231,7 @@ if config.player_mutes then
             title='Muted',
             description='A player has been muted',
             color=Colors.yellow,
-            ['Player']='<inline>'..player_name
+            ['Player']='<inline>' .. player_name
         }
     end)
     Event.add(defines.events.on_player_unmuted, function(event)
@@ -230,7 +240,7 @@ if config.player_mutes then
             title='Un-Muted',
             description='A player has been un-muted',
             color=Colors.green,
-            ['Player']='<inline>'..player_name
+            ['Player']='<inline>' .. player_name
         }
     end)
 end
@@ -245,8 +255,8 @@ if config.player_kicks then
                 title='Kick',
                 description='A player has been kicked',
                 color=Colors.orange,
-                ['Player']='<inline>'..player_name,
-                ['By']='<inline>'..by_player.name,
+                ['Player']='<inline>' .. player_name,
+                ['By']='<inline>' .. by_player.name,
                 ['Reason']=event.reason
             }
         end
@@ -261,7 +271,7 @@ if config.player_promotes then
             title='Promote',
             description='A player has been promoted',
             color=Colors.green,
-            ['Player']='<inline>'..player_name
+            ['Player']='<inline>' .. player_name
         }
     end)
     Event.add(defines.events.on_player_demoted, function(event)
@@ -270,7 +280,7 @@ if config.player_promotes then
             title='Demote',
             description='A player has been demoted',
             color=Colors.yellow,
-            ['Player']='<inline>'..player_name
+            ['Player']='<inline>' .. player_name
         }
     end)
 end
@@ -282,9 +292,9 @@ Event.add(defines.events.on_console_command, function(event)
         if config[event.command] then
             emit_event{
                 title=event.command:gsub('^%l', string.upper),
-                description='/'..event.command..' was used',
+                description='/' .. event.command .. ' was used',
                 color=Colors.grey,
-                ['By']='<inline>'..player_name,
+                ['By']='<inline>' .. player_name,
                 ['Details'] = event.parameters ~= '' and event.parameters or nil
             }
         end
