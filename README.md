@@ -20,14 +20,6 @@ Explosive Gaming (often ExpGaming) is a server hosting community with a strong f
 
 4. More advanced users may want to play with the other configs files within `./config` but please be aware that some of the config files will require a basic understanding of lua while others may just be a list of values.
 
-<<<<<<< HEAD
-5. Once you have made any config changes that you wish to make open Factorio, select play, then start scenario (or host scenario from within multiplayer tab), and select the scenario which will be called `scenario-master` if you have downloaded the latest stable release and have not changed the folder name.
-
-6. The scenario will now load all the selected modules and start the map, any errors or exceptions raised in the scenario should not cause a game/server crash, so if any features do not work as expected then it may be returning an error in the log.
-   Please report these errors to [the issues page](issues).
-
-## Contributing
-=======
 6) You will now be asked to generate your map and the scenario will load all selected modules. If any module does not load as expected please check `factorio-current.log` in your Factorio directory for errors and report them to our [issues page][issues].
 
 ## Contributing
@@ -47,27 +39,27 @@ For developers wanting to add features please follow these guidelines:
 
 ## Releases
 
-| Release* | Release Name | Factorio Version** |
-|---|---|---|
-| [6.2][s6.2] | Mega Feature Bundle | [1.1.32][f1.1.32] |
-| [6.1][s6.1] | External Data Overhaul | [1.0.0][f1.0.0] |
-| [6.0][s6.0] | Gui / 0.18 Overhaul | [0.18.17][f0.18.17] |
-| [5.10][s5.10] | Data Store Rewrite | [0.17.71][f0.17.71] |
-| [5.9][s5.9] | Control Modules and Documentation | [0.17.63][f0.17.63] |
-| [5.8][s5.8] | Home and Chat Bot | [0.17.47][f0.17.49] |
-| [5.7][s5.7] | Warp System | [0.17.47][f0.17.47] |
-| [5.6][s5.6] | Information Guis | [0.17.44][f0.17.44] |
-| [5.5][s5.5] | Gui System | [0.17.43][f0.17.43] |
-| [5.4][s5.4] | Admin Controls | [0.17.32][f0.17.32] |
-| [5.3][s5.3] | Custom Roles | [0.17.28][f0.17.28] |
-| [5.2][s5.2] | Quality of life | [0.17.22][f0.17.22] |
-| [5.1][s5.1] | Permission Groups | [0.17.13][f0.17.13] |
-| [5.0][s5.0] | 0.17 Overhaul| [0.17][f0.17.9] |
-| [4.0][s4.0] | Softmod Manager | [0.16.51][f0.16.51] |
-| [3.0][s3.0] | 0.16 Overhaul | [0.16][f0.16] |
-| [2.0][s2.0] | Localization and clean up | [0.15][f0.15] |
-| [1.0][s1.0] | Modulation | [0.15][f0.15] |
-| [0.1][s0.1] | First Tracked Version | [0.14][f0.14] |
+| Release*      | Release Name                      | Factorio Version**  |
+| ------------- | --------------------------------- | ------------------- |
+| [6.2][s6.2]   | Mega Feature Bundle               | [1.1.32][f1.1.32]   |
+| [6.1][s6.1]   | External Data Overhaul            | [1.0.0][f1.0.0]     |
+| [6.0][s6.0]   | Gui / 0.18 Overhaul               | [0.18.17][f0.18.17] |
+| [5.10][s5.10] | Data Store Rewrite                | [0.17.71][f0.17.71] |
+| [5.9][s5.9]   | Control Modules and Documentation | [0.17.63][f0.17.63] |
+| [5.8][s5.8]   | Home and Chat Bot                 | [0.17.47][f0.17.49] |
+| [5.7][s5.7]   | Warp System                       | [0.17.47][f0.17.47] |
+| [5.6][s5.6]   | Information Guis                  | [0.17.44][f0.17.44] |
+| [5.5][s5.5]   | Gui System                        | [0.17.43][f0.17.43] |
+| [5.4][s5.4]   | Admin Controls                    | [0.17.32][f0.17.32] |
+| [5.3][s5.3]   | Custom Roles                      | [0.17.28][f0.17.28] |
+| [5.2][s5.2]   | Quality of life                   | [0.17.22][f0.17.22] |
+| [5.1][s5.1]   | Permission Groups                 | [0.17.13][f0.17.13] |
+| [5.0][s5.0]   | 0.17 Overhaul                     | [0.17][f0.17.9]     |
+| [4.0][s4.0]   | Softmod Manager                   | [0.16.51][f0.16.51] |
+| [3.0][s3.0]   | 0.16 Overhaul                     | [0.16][f0.16]       |
+| [2.0][s2.0]   | Localization and clean up         | [0.15][f0.15]       |
+| [1.0][s1.0]   | Modulation                        | [0.15][f0.15]       |
+| [0.1][s0.1]   | First Tracked Version             | [0.14][f0.14]       |
 
 \* Scenario patch releases have been omitted and can be found [here][releases].
 
@@ -92,7 +84,6 @@ For developers wanting to add features please follow these guidelines:
 [s2.0]: https://github.com/explosivegaming/scenario/releases/tag/v2.0
 [s1.0]: https://github.com/explosivegaming/scenario/releases/tag/v1.0
 [s0.1]: https://github.com/explosivegaming/scenario/releases/tag/v0.1
->>>>>>> cdd34ebaea61e014b2cce9b251022009a13b55d4
 
 All are welcome to make pull requests and issues for this scenario, if you are in any doubt, please ask someone in our discord. If you do not know lua and don't feel like learning you can always make a feature request. To find out what we already have please read our docs. Please keep in mind while making code changes:
 
@@ -106,9 +97,6 @@ All are welcome to make pull requests and issues for this scenario, if you are i
 The All-Weekend Factorio codebase is licensed under the [GNU General Public License v3.0](LICENSE)
 discord: https://awf.yt
 
-<<<<<<< HEAD
-The original code for this scenario is from [Explosive Gaming](https://github.com/explosivegaming/scenario), we just adapted it to suit our needs and have some extra stuff we use
-=======
 [stable-dl]: https://github.com/explosivegaming/scenario/archive/master.zip
 [experimental-dl]: https://github.com/explosivegaming/scenario/archive/dev.zip
 [releases]: https://github.com/explosivegaming/scenario/releases
@@ -117,4 +105,3 @@ The original code for this scenario is from [Explosive Gaming](https://github.co
 [issues]: https://github.com/explosivegaming/scenario/issues/new/choose
 [website]: https://explosivegaming.nl
 [discord]: https://discord.explosivegaming.nl
->>>>>>> cdd34ebaea61e014b2cce9b251022009a13b55d4

@@ -103,6 +103,7 @@ local function spawn_pattern(surface, position)
     end
 
     surface.set_tiles(tiles_to_make)
+	log("spawn pattern")
 end
 
 -- Generates extra water as defined in the config
@@ -120,6 +121,8 @@ end
 local function spawn_entities(surface, position)
     position = apply_offset(position, config.entities.offset)
     for _, entity in pairs(config.entities.locations) do
+		log(serpent.line(position))
+		log(serpent.line(entity))
         local pos = apply_offset(position, {x=entity[2], y=entity[3]})
         entity = surface.create_entity{name=entity[1], position=pos, force='neutral'}
 
@@ -222,6 +225,7 @@ Event.add(defines.events.on_player_created, function(event)
     local s = player.surface
     get_spawn_force()
     spawn_area(s, p)
+	log(config.pattern.enabled)
     if config.pattern.enabled then spawn_pattern(s, p) end
     if config.water.enabled then spawn_water(s, p) end
     if config.afk_belts.enabled then spawn_belts(s, p) end

@@ -213,10 +213,7 @@ Roles.new_role('Veteran','Vet')
 Roles.new_role('Member','Mem')
 :set_permission_group('Standard')
 :set_custom_color{r=24,g=172,b=188}
-<<<<<<< HEAD
-=======
 :set_flag('deconlog-bypass')
->>>>>>> upstream/dev
 :set_parent('Regular')
 :allow{
     'gui/task-list/add',
@@ -310,7 +307,6 @@ Roles.define_role_order{
 }
 
 Roles.override_player_roles{
-<<<<<<< HEAD
     ["Windsinger"]={"Senior Administrator","Moderator", "Member"},
     ["BulletToothJake"]={"Senior Administrator", "Moderator", "Member"},
     ["DistroByte"]={"Senior Administrator", "Moderator", "Member"},
@@ -318,44 +314,4 @@ Roles.override_player_roles{
     ["Shalrath"]={"Senior Administrator", "Administrator","Moderator","Member"},
     -- add more role overrides below
     -- Use Discord bot roles override, this shouldn't be used much
-=======
-    ['PHIDIAS0303']={'Moderator', 'Board Member', 'Member'},
-    ['aldldl']={'Administrator', 'Moderator','Member'},
-    ['arty714']={'Senior Administrator', 'Moderator', 'Member'},
-    ['Cooldude2606']={'Senior Administrator', 'Moderator', 'Member'},
-    ['Drahc_pro']={'Administrator', 'Moderator', 'Member'},
-    ['mark9064']={'Administrator', 'Moderator','Member'},
-    ['7h3w1z4rd']={'Moderator','Member'},
-    ['FlipHalfling90']={'Moderator','Member'},
-    ['hamsterbryan']={'Moderator','Member'},
-    ['HunterOfGames']={'Moderator','Member'},
-    ['NextIdea']={'Moderator','Member'},
-    ['TheKernel32']={'Moderator','Member'},
-    ['TheKernel64']={'Moderator','Member'},
-    ['tovernaar123']={'Moderator','Member'},
-    ['UUBlueFire']={'Moderator','Member'},
-    ['AssemblyStorm']={'Moderator', 'Member'},
-    ['banakeg']={'Moderator','Member'},
-    ['connormkii']={'Moderator', 'Member'},
-    ['cydes']={'Moderator','Member'},
-    ['darklich14']={'Moderator','Member'},
-    ['facere']={'Moderator','Member'},
-    ['freek18']={'Moderator','Member'},
-    ['Gizan']={'Moderator','Member'},
-    ['LoicB']={'Moderator','Member'},
-    ['M74132']={'Moderator','Member'},
-    ['mafisch3']={'Moderator','Member'},
-    ['maplesyrup01']={'Moderator','Member'},
-    ['ookl']={'Moderator','Member'},
-    ['Phoenix27833']={'Moderator','Member'},
-    ['porelos']={'Moderator','Member'},
-    ['Ruuyji']={'Moderator','Member'},
-    ['samy115']={'Moderator','Member'},
-    ['SilentLog']={'Moderator','Member'},
-    ['Tcheko']={'Moderator','Member'},
-    ['thadius856']={'Moderator','Member'},
-    ['whoami32']={'Moderator','Member'},
-    ['Windbomb']={'Moderator','Member'},
-    ['XenoCyber']={'Moderator','Member'}
->>>>>>> upstream/dev
 }

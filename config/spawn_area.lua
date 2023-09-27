@@ -5,6 +5,7 @@ return {
 	spawn_area = {
 		deconstruction_radius = 20,
 		deconstruction_tile = nil,
+		tile_radius = 20,
 		landfill_radius = 50,
 	},
 	turrets = { --- @setting infinite_ammo_turrets These turrets will have they ammo refilled automatically and can not be looted
@@ -46,6 +47,10 @@ return {
 		}
 	},
 	water = {
+		enabled = false
+		-- TODO
+	},
+	resource_refill_nearby = {
 		enabled = false
 		-- TODO
 	}
