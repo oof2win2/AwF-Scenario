@@ -12,6 +12,9 @@ end)
 
 -- Apply an offset to a LuaPosition
 local function apply_offset(position, offset)
+	if not next(offset) then
+		return position
+	end
     return {x=position.x + (offset.x or offset[1]), y=position.y + (offset.y or offset[2])}
 end
 

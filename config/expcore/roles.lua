@@ -213,7 +213,6 @@ Roles.new_role('Veteran','Vet')
 Roles.new_role('Member','Mem')
 :set_permission_group('Standard')
 :set_custom_color{r=24,g=172,b=188}
-:set_flag('deconlog-bypass')
 :set_parent('Regular')
 :allow{
     'gui/task-list/add',
@@ -240,7 +239,6 @@ Roles.new_role('Regular','Reg')
     'command/me',
     'standard-decon',
     'bypass-entity-protection',
-	'bypass-nukeprotect'
 }
 :set_auto_assign_condition(function(player)
     if player.online_time >= mins60 then -- auto assign after $hours3, which is currently 3h (from ticks)
