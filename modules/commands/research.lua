@@ -43,14 +43,18 @@ local function research_notification(event)
     end
 
     if is_inf_res then
-        if config.bonus.enabled then
-            if event.research.name == 'mining-productivity-4' and event.research.force.technologies['mining-productivity-4'].level > 4 then
-                event.research.force[config.bonus.name] = base_rate + event.research.force.technologies['mining-productivity-4'].level * config.bonus.rate
+        if event.research.name == 'mining-productivity-4' and event.research.level > 4 then
+            if config.bonus.enabled then
+                event.research.force[config.bonus.name] = base_rate + event.research.level * config.bonus.rate
+            end
+
+            if config.pollution_ageing_by_research then
+                game.map_settings.pollution.ageing = math.min(10, event.research.level / 5)
             end
         end
 
         if not (event.by_script) then
-            game.print{'expcom-res.inf', format_time(game.tick, research_time_format), event.research.name, event.research.level}
+            game.print{'expcom-res.inf', format_time(game.tick, research_time_format), event.research.name, event.research.level - 1}
         end
     else
         if not (event.by_script) then

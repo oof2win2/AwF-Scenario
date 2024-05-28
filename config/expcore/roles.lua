@@ -40,7 +40,7 @@ Roles.new_role('Senior Administrator','SAdmin')
     'command/debug',
     'command/toggle-cheat-mode',
     'toggle_map_editor',
-    'command/research-all',
+    'command/research-all'
 }
 
 Roles.new_role('Administrator','Admin')
@@ -55,7 +55,7 @@ Roles.new_role('Administrator','Admin')
     'gui/warp-list/bypass-proximity',
     'gui/warp-list/bypass-cooldown',
     'command/connect-all',
-	'command/collectdata',
+	'command/collectdata'
 }
 
 Roles.new_role('Moderator','Mod')
@@ -100,6 +100,7 @@ Roles.new_role('Trainee','TrMod')
 :allow{
     'command/admin-chat',
     'command/admin-marker',
+    'command/goto',
     'command/teleport',
     'command/bring',
     'command/give-warning',
@@ -120,14 +121,14 @@ Roles.new_role('Trainee','TrMod')
     'command/search-recent',
     'command/search-online',
     'command/personal-battery-recharge',
-    'command/waterfill',
     'command/pollution-off',
     'command/pollution-clear',
     'command/bot-queue-get',
     'command/bot-queue-set',
     'command/game-speed',
     'command/kill-biters',
-    'command/remove-biters'
+    'command/remove-biters',
+    'gui/playerdata'
 }
 
 --- Trusted Roles
@@ -144,7 +145,7 @@ Roles.new_role('Board Member','Board')
     'command/spectate',
     'command/follow',
     'command/personal-battery-recharge',
-    'command/waterfill'
+    'gui/playerdata'
 }
 
 Roles.new_role('Senior Backer','Backer')
@@ -221,10 +222,16 @@ Roles.new_role('Member','Mem')
     'gui/warp-list/edit',
     'command/save-quickbar',
     'gui/vlayer-edit',
+    'command/vlayer-info',
     'command/personal-logistic',
     'command/auto-research',
-    'command/manual-train',
-    'command/lawnmower'
+    'command/set-trains-to-automatic',
+    'command/lawnmower',
+    'command/waterfill',
+    'command/artillery-target-remote',
+    'command/clear-item-on-ground',
+    'command/clear-blueprint',
+    'gui/surveillance'
 }
 
 local mins60 = 60*60*60
@@ -271,7 +278,9 @@ local default = Roles.new_role('Guest','')
     'gui/warp-list',
     'gui/readme',
     'gui/vlayer',
-    'gui/research'
+    'gui/research',
+    'gui/autofill',
+    'gui/module'
 }
 
 --- Jail role
